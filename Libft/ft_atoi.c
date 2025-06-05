@@ -1,22 +1,21 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chankach <chankach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 18:59:07 by chankach          #+#    #+#             */
-/*   Updated: 2025/05/27 20:04:01 by chankach         ###   ########.fr       */
+/*   Created: 2025/06/05 19:26:54 by chankach          #+#    #+#             */
+/*   Updated: 2025/06/05 19:27:02 by chankach         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
-#include <stdlib.h>
 #include <stdio.h>
 
-int ft_atoi(const char *nptr)
+int	ft_atoi(const char *nptr)
 {
 	int	i;
-	int sign;
+	int	sign;
 	int	number;
 
 	i = 0;
@@ -24,9 +23,9 @@ int ft_atoi(const char *nptr)
 	number = 0;
 	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
 		i++;
-	if(nptr[i] == '+' || nptr[i] == '-')
+	if (nptr[i] == '+' || nptr[i] == '-')
 	{
-		if(nptr[i] == '-')
+		if (nptr[i] == '-')
 			sign = -1;
 		i++;
 	}
@@ -36,10 +35,10 @@ int ft_atoi(const char *nptr)
 		number += nptr[i] - 48;
 		i++;
 	}
-	return(number * sign);
+	return (number * sign);
 }
-int main()
-{
-    printf("%d\n", ft_atoi(" \n +1234ab567\n"));
-	printf("%d\n", atoi(" \n +1234ab567\n"));
-}
+// int main()
+// {
+//     printf("%d\n", ft_atoi(" \n +1234ab567\n"));
+// 	printf("%d\n", atoi(" \n +1234ab567\n"));
+// }

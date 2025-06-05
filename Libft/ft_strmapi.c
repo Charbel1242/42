@@ -3,35 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charbel_hankache <charbel_hankache@stud    +#+  +:+       +#+        */
+/*   By: chankach <chankach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 22:07:31 by charbel_han       #+#    #+#             */
-/*   Updated: 2025/06/04 23:41:31 by charbel_han      ###   ########.fr       */
+/*   Updated: 2025/06/05 19:36:32 by chankach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include<stdio.h>
 #include<stdlib.h>
 
-int ft_strlen(char const *str)
+int	ft_strlen(char const *str)
 {
-    int	i;
-	
+	int	i;
+
 	i = 0;
-    while (str[i] != '\0')
-    {
-		i++;  
-    }
+	while (str[i] != '\0')
+	{
+		i++;
+	}
 	return (i);
 }
 
-char *ft_strmapi(char const *s, char(*f)(unsigned int, char))
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-    size_t i;
-	char *mapi;
+	size_t	i;
+	char	*mapi;
 
 	if (!s || !f)
-		return(NULL);
+		return (NULL);
 	i = 0;
 	mapi = (char *)malloc((ft_strlen(s) + 1) * sizeof(char));
 	if (!mapi)
@@ -45,16 +45,16 @@ char *ft_strmapi(char const *s, char(*f)(unsigned int, char))
 	return (mapi);
 }
 
-char ft_toupper(unsigned int i, char c)
+char	ft_toupper(unsigned int i, char c)
 {
-    (void)i;
+	(void)i;
 	if (c >= 'a' && c <= 'z')
-        return(c - 32);
-    return(c);
+		return (c - 32);
+	return (c);
 }
-int main()
-{
-	char *s = ft_strmapi("hello 42!", ft_toupper);
-	printf("%s\n",s);
-	free(s);
-}
+// int main()
+// {
+// 	char *s = ft_strmapi("hello 42!", ft_toupper);
+// 	printf("%s\n",s);
+// 	free(s);
+// }

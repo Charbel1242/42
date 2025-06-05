@@ -3,36 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charbel_hankache <charbel_hankache@stud    +#+  +:+       +#+        */
+/*   By: chankach <chankach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 15:26:19 by charbel_han       #+#    #+#             */
-/*   Updated: 2025/06/01 20:39:32 by charbel_han      ###   ########.fr       */
+/*   Updated: 2025/06/05 19:44:53 by chankach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include<stdio.h>
 #include<stdlib.h>
 
-static int ft_numlen(int n)
+static int	ft_numlen(int n)
 {
-    int	len;
-	
+	int	len;
+
 	if (n <= 0)
 		len = 1;
 	else
 		len = 0;
-    while (n != 0)
-    {
+	while (n != 0)
+	{
 		len++;
-		n /= 10; 
-    }
+		n /= 10;
+	}
 	return (len);
 }
-char *ft_itoa(int n)
+
+char	*ft_itoa(int n)
 {
-	int len;
-	long nb;
-	char *str;
+	int		len;
+	long	nb;
+	char	*str;
 
 	len = ft_numlen(n);
 	nb = n;
@@ -55,10 +56,10 @@ char *ft_itoa(int n)
 	}
 	return (str);
 }
-int main()
-{
-	char *i;
-	i = ft_itoa(128);
-	printf("%s\n", i);
-	free(i);
-}
+// int main()
+// {
+// 	char *i;
+// 	i = ft_itoa(128);
+// 	printf("%s\n", i);
+// 	free(i);
+// }

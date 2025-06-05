@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charbel_hankache <charbel_hankache@stud    +#+  +:+       +#+        */
+/*   By: chankach <chankach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 23:46:23 by charbel_han       #+#    #+#             */
-/*   Updated: 2025/06/05 07:18:44 by charbel_han      ###   ########.fr       */
+/*   Updated: 2025/06/05 19:30:38 by chankach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include<stdio.h>
 #include<stdlib.h>
 
-void ft_striteri(char *s, void (*f)(unsigned int, char*))
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-    size_t i;
-	char *mapi;
+	size_t	i;
+	char	*mapi;
 
 	if (!s || !f)
-		return;
+		return ;
 	i = 0;
 	while (s[i] != '\0')
 	{
@@ -27,17 +27,17 @@ void ft_striteri(char *s, void (*f)(unsigned int, char*))
 		i++;
 	}
 	mapi[i] = '\0';
-	return;
+	return ;
 }
-char ft_toupper(unsigned int i, char c)
-{
-    (void)i;
-	if (c >= 'a' && c <= 'z')
-        return(c - 32);
-    return(c);
-}
-int main()
-{
-	char *s = ft_striteri("hello 42!", ft_toupper);
-	printf("%s\n",s);
-}
+// char	ft_toupper(unsigned int i, char c)
+// {
+// 	(void) i;
+// 	if (c >= 'a' && c <= 'z')
+// 		return (c - 32);
+// 	return (c);
+// }
+// int main()
+// {
+// 	char *s = ft_striteri("hello 42!", ft_toupper);
+// 	printf("%s\n",s);
+// }
