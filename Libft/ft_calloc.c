@@ -10,14 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
+#include <stdint.h>
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	unsigned char	*arr;
 	size_t			i;
 
+	if (size && nmemb > SIZE_MAX / size)
+		return (NULL);
 	i = 0;
 	arr = (unsigned char *)malloc (nmemb * size);
 	if (!arr)

@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include<stdio.h>
 #include<stdlib.h>
 
-int	ft_strlen(char const *str)
+size_t	ft_strlen(char const *str)
 {
 	int	i;
 
@@ -45,13 +46,13 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	return (mapi);
 }
 
-char	ft_toupper(unsigned int i, char c)
-{
-	(void)i;
-	if (c >= 'a' && c <= 'z')
-		return (c - 32);
-	return (c);
-}
+// char	ft_toupper(unsigned int i, char c)
+// {
+// 	(void)i;
+// 	if (c >= 'a' && c <= 'z')
+// 		return (c - 32);
+// 	return (c);
+// }
 // int main()
 // {
 // 	char *s = ft_strmapi("hello 42!", ft_toupper);

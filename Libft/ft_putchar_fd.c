@@ -10,9 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <unistd.h>
+#include <fcntl.h>
 
 void	ft_putchar_fd(char c, int fd)
 {
-	write(1, &c, 1);
+	write(fd, &c, 1);
 }
+// int	main()
+// {
+// 	int	ex = open("test.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+// 	if (ex < 0)
+// 		return (0) ;
+// 	ft_putchar_fd ('C', ex);
+// 	close(ex);
+// }

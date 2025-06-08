@@ -10,34 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stdio.h>
-#include<stdlib.h>
+#include "libft.h"
+#include "libft.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
 	size_t	i;
-	char	*mapi;
 
 	if (!s || !f)
 		return ;
 	i = 0;
 	while (s[i] != '\0')
 	{
-		mapi[i] = f(i, s[i]);
+		f(i, &s[i]);
 		i++;
 	}
-	mapi[i] = '\0';
-	return ;
 }
-// char	ft_toupper(unsigned int i, char c)
+
+// void	ft_toupper(unsigned int i, char *c)
 // {
 // 	(void) i;
-// 	if (c >= 'a' && c <= 'z')
-// 		return (c - 32);
-// 	return (c);
+// 	if (*c >= 'a' && *c <= 'z')
+// 		*c -= 32;
 // }
 // int main()
 // {
-// 	char *s = ft_striteri("hello 42!", ft_toupper);
-// 	printf("%s\n",s);
+// 	char s[] = "hello 42!";
+// 	ft_striteri(s, ft_toupper);
+// 	printf("%s\n", s);
 // }

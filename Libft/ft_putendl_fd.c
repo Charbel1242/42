@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chankach <chankach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: charbel_hankache <charbel_hankache@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/24 12:53:51 by chankach          #+#    #+#             */
-/*   Updated: 2025/06/05 19:48:02 by chankach         ###   ########.fr       */
+/*   Created: 2025/06/06 17:55:09 by charbel_han       #+#    #+#             */
+/*   Updated: 2025/06/08 14:42:55 by charbel_han      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
 
-void	ft_bzero(void *str, size_t n)
+void	ft_putendl_fd(char *s, int fd)
 {
-	unsigned char	*ptr;
-	size_t			i;
+	int	i;
 
-	ptr = (unsigned char *) str;
 	i = 0;
-	while (i < n)
+	while (s[i] != '\0')
 	{
-		ptr[i] = 0;
+		write(fd, &s[i], 1);
 		i++;
 	}
+	write (fd, "\n", 1);
 }
 // int main()
 // {
-//     int i;
-//     i = 0;
-//     char str[10] = "abcdefghij";
-//     ft_bzero(str,7);
-//     while(i<10)
-//     {
-//         printf("%d", str[i]);
-//         i++;
-//     }
+// 	int ex = open("test.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+// 	if (ex < 0)
+// 		return (0);
+// 	ft_putendl_fd("Hello 42!", ex);
+// 	close (ex);
+// 	return (0);
 // }

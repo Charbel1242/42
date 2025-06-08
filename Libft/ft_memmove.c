@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
@@ -21,6 +23,9 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 
 	ptr1 = (unsigned char *)src;
 	ptr2 = (unsigned char *)dest;
+	temp = (unsigned char *)malloc(n * sizeof(unsigned char));
+	if (!temp)
+		return (NULL);
 	i = 0;
 	while (i < n)
 	{
@@ -33,6 +38,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 		ptr2[i] = temp[i];
 		i++;
 	}
+	free (temp);
 	return (dest);
 }
 // int main()
