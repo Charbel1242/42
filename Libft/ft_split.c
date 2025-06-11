@@ -55,6 +55,15 @@ static char	*ft_dup(const char *s, size_t len)
 	return (word);
 }
 
+static void ft_next_word(const char *s, char c, size_t *i, size_t *j)
+{
+	while (s[*i] == c && s[*i] != '\0')
+			(*i)++;
+		*j = *i;
+	while (s[*j] != '\0' && s[*j] != c)
+		(*j)++;
+}
+
 static void	ft_free(char **arr, size_t k)
 {
 	while (k > 0)
@@ -67,7 +76,9 @@ static void	ft_free(char **arr, size_t k)
 
 char	**ft_split(char const *s, char c)
 {
-	size_t	i, j, k;
+	size_t i;
+	size_t j;
+	size_t k;
 	char	**arr;
 
 	if (!s)
@@ -79,11 +90,7 @@ char	**ft_split(char const *s, char c)
 	k = 0;
 	while (s[i] != '\0')
 	{
-		while (s[i] == c && s[i] != '\0')
-			i++;
-		j = i;
-		while (s[i] != '\0' && s[i] != c)
-			i++;
+		ft_next_word(s, c, &i, &j);
 		if (i > j)
 		{
 			arr[k] = ft_dup(s + j, i - j);
@@ -94,6 +101,7 @@ char	**ft_split(char const *s, char c)
 			}
 			k++;
 		}
+		j = i;
 	}
 	arr[k] = NULL;
 	return (arr);
