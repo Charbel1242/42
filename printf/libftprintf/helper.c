@@ -10,41 +10,50 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_putstr(char *s)
+int	ft_putstr(char *s)
 {
 	int		i;
 
 	i = 0;
+	if (!s)
+		return (write(1, "(null)", 6));
 	while (s[i] != '\0')
 	{
 		write(1, &s[i], 1);
 		i++;
 	}
+	return (i);
 }
 
-void	ft_putnbr(int n)
+int	ft_putnbr(int n)
 {
-	char	c;
+	int		c;
+	long	nb;
 
-	if (n < 0)
+	c = 0;
+	nb = n;
+	if (nb < 0)
 	{
-		write(1, "-", 1);
-		n = -n;
+		c += write(1, "-", 1);
+		nb = -nb;
 	}
-	if (n >= 10)
-		ft_putnbr(n / 10);
-	c = (n % 10) + '0';
-	write(1, &c, 1);
+	if (nb >= 10)
+		c += ft_putnbr(nb / 10);
+	c += write(1, &"0123456789"[nb % 10], 1);
+	return (c);
 }
 
-void	ft_puthex(unsigned int n)
+int	ft_putnbr_base(unsigned long n, const char *base)
 {
-	char	*hex;
-	char	c;
+	int	len_base;
+	int	count;
 
-	hex = "0123456789abcdef";
-	if (n >= 16)
-		ft_puthex(n / 16);
-	c = hex[n % 16];
-	write(1, &c, 1);
+	len_base = 0;
+	count = 0;
+	while (base[len_base])
+		len_base++;
+	if (n >= (unsigned long) len_base)
+		count += ft_putnbr_base(n / len_base, base);
+	count += write(1, &base[n % len_base], 1);
+	return (count);
 }

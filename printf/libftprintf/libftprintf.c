@@ -26,84 +26,49 @@ void	ft_putstr(char *s)
 	}
 }
 
-char	ft_indicator(const char *indicator)
+int	ft_print(char indicator, va_list args)
 {
-	int	i;
-
-	i = 0;
-	while (indicator[i] != '%')
-		i++;
-	if (indicator[i + 1] == 'c')
-		return (indicator[i + 1]);
-	if (indicator[i + 1] == 's')
-		return (indicator[i + 1]);
-	if (indicator[i + 1] == 'p')
-		return (indicator[i + 1]);
-	if (indicator[i + 1] == 'd')
-		return (indicator[i + 1]);
-	if (indicator[i + 1] == 'i')
-		return (indicator[i + 1]);
-	if (indicator[i + 1] == 'u')
-		return (indicator[i + 1]);
-	if (indicator[i + 1] == 'x')
-		return (indicator[i + 1]);
-	if (indicator[i + 1] == 'X')
-		return (indicator[i + 1]);
-	if (indicator[i + 1] == '%')
-		return (indicator[i + 1]);
+	if (indicator == 'c')
+		return (ft_putchar(va_arg(args, int)));
+	if (indicator == 's')
+		return (ft_putstr(va_arg(args, char *)));
+	if (indicator == 'p')
+		return (ft_putptr(va_arg(args, void *)));
+	if (indicator == 'd' || indicator == 'i')
+		return (ft_putnbr(va_arg(args, int)));
+	if (indicator == 'u')
+		return (ft_putnbr_base(va_arg(args, unsigned int), "0123456789"));
+	if (indicator == 'x')
+		return (ft_putnbr_base(va_arg(args, unsigned int), "0123456789abcdef"));
+	if (indicator == 'X')
+		return (ft_putnbr_base(va_arg(args, unsigned int), "0123456789ABCDEF"));
+	if (indicator == '%')
+		return (write(1, "%", 1));
 	return (0);
 }
 
-void	print(const char *arg, char indicator, char c)
+int	ft_printf(const char *format, ...)
 {
-	int	i;
+	va_list	args;
+	int		i;
+	int		output;
 
 	i = 0;
-	while (arg[i] != '\0')
+	output = 0;
+	va_start(args, format);
+	while (format[i] != '\0')
 	{
-		if ((arg[i] == '%' && arg[i + 1] == '%'))
+		if (format[i] == '%' && format[i + 1] != '\0')
 		{
-			write(1, "%", 1);
+			output += ft_print(format[i + 1], args);
 			i += 2;
 			continue ;
 		}
-		if ((arg[i] == '%' && arg[i + 1] == indicator))
-		{
-			write (1, &c, 1);
-			i += 2;
-			continue ;
-		}
-		write (1, &arg[i], 1);
+		output += write(1, &format[i], 1);
 		i++;
 	}
-}
-
-int	ft_printf(const char *indicator, ...)
-{
-	va_list	arg;
-	char	*to_print_s;
-	char	to_print;
-	char	i;
-
-	va_start(arg, indicator);
-	i = ft_indicator(indicator);
-	if (i == 'c' || i == '%')
-	{
-		to_print = (char)va_arg(arg, int);
-		print(indicator, i, to_print);
-	}
-	if (i == 's')
-	{
-		to_print_s = va_arg(arg, char *);
-		ft_putstr(to_print_s);
-	}
-	if 
-	{
-	
-		
-	}
-	va_end(arg);
-	return (0);
+	va_end(args);
+	return (output);
 }
 
 int	main()
@@ -113,3 +78,4 @@ int	main()
 	ft_printf("char test : %%c\n");
 	printf("char test : %%c\n");
 }
+
