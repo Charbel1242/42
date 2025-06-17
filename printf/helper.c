@@ -57,3 +57,28 @@ int	ft_putnbr_base(unsigned long n, const char *base)
 	count += write(1, &base[n % len_base], 1);
 	return (count);
 }
+
+int	ft_putptr(void *ptr)
+{
+	unsigned long	value;
+	int				count;
+	char			hex[16];
+	int				i;
+	char			*digits;
+
+	value = (unsigned long) ptr;
+	count = 0;
+	i = 0;
+	digits = "0123456789abcdef";
+	if (!ptr)
+		return (write(1, "(nil)", 5));
+	coiunt += write(1, "0x", 2);
+	while (value)
+	{
+		hex[i++] = digits[value % 16];
+		value /= 16;
+	}
+	while (i--)
+		count += write(1, &hex[i], 1);
+	return (count);
+}

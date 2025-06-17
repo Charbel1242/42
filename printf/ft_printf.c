@@ -1,30 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libftprintf.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: chankach <chankach@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/11 20:42:27 by charbel_han       #+#    #+#             */
-/*   Updated: 2025/06/14 23:47:34 by chankach         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
-
-void	ft_putstr(char *s)
-{
-	int		i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		write(1, &s[i], 1);
-		i++;
-	}
-}
 
 int	ft_print(char indicator, va_list args)
 {
