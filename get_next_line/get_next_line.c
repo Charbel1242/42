@@ -6,7 +6,7 @@
 /*   By: chankach <chankach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 11:02:51 by chankach          #+#    #+#             */
-/*   Updated: 2025/06/21 12:33:25 by chankach         ###   ########.fr       */
+/*   Updated: 2025/07/01 19:21:14 by chankach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
-#BUFFER_SIZE 10
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 10
 
 typedef struct s_list
 {
@@ -39,7 +40,7 @@ void	cleaned_list(t_list **list)
 	last_node = find_last_node(*list);
 	i = 0;
 	k = 0;
-	while (last_node->str_buf[i] != '\0' && last_node->str_buf[i] != '\n')\
+	while (last_node->str_buf[i] != '\0' && last_node->str_buf[i] != '\n')
 		i++;
 	while (last_node->str_buf[i] != '\0' && last_node->str_buf[i++])
 		buf[k++] = last_node->str_buf[i];
@@ -54,7 +55,7 @@ char	*get_line(t_list *list)
 	int		str_len;
 	char	*next_str;
 
-	if(!list)
+	if (!list)
 		return (NULL);
 	str_len = len_to_newline(list);
 	next_str = malloc(str_len + 1);
@@ -67,7 +68,7 @@ char	*get_line(t_list *list)
 void	append(t_list **list, char *buf)
 {
 	t_list	*new_node;
-	t_list *last_node;
+	t_list	*last_node;
 
 	last_node = find_last_node(*list);
 	new_node = malloc(sizeof(t_list));
@@ -77,8 +78,8 @@ void	append(t_list **list, char *buf)
 		*list = new_node;
 	else
 		last_node -> next = new_node;
-	new_node-> str_buf = buf;
-	new_node-> next = NULL;
+	new_node->str_buf = buf;
+	new_node->next = NULL;
 }
 
 void	create_list(t_list **list, int fd)
@@ -88,7 +89,7 @@ void	create_list(t_list **list, int fd)
 
 	while (!found_newline(*list))
 	{
-		buf =malloc(BUFFER_SIZE + 1);
+		buf = malloc(BUFFER_SIZE + 1);
 		if (NULL == buf)
 			return (NULL);
 		char_read = read(fd, buf, BUFFER_SIZE);
@@ -104,16 +105,17 @@ void	create_list(t_list **list, int fd)
 
 char	*get_next_line(int fd)
 {
-    static t_list	*list;
+	static t_list	*list;
 	char			*next_line;
 
 	list = NULL;
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &nextline, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &next_line, 0) < 0)
 		return (NULL);
 	create_list(&list, fd);
 	if (list == NULL)
-		return(NULL);
+		return (NULL);
 	next_line = get_line(list);
 	cleaned_list(&list);
 	return (next_line);
 }
+#endif
