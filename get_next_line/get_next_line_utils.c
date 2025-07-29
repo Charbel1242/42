@@ -6,24 +6,76 @@
 /*   By: chankach <chankach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 11:04:47 by chankach          #+#    #+#             */
-/*   Updated: 2025/07/23 21:07:52 by chankach         ###   ########.fr       */
+/*   Updated: 2025/07/29 21:22:54 by chankach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	endline(t_list *head)
+int	ft_end_line(t_list *head)
 {
 	while (head)
 	{
 		if (head->content == '\n')
-			return (1);
+			return (0);
 		head = head->next;
 	}
-	return (0);
+	return (1);
 }
 
-void	init_list(t_list **head, char c)
+void	ft_freelist(t_list **head)
+{
+	t_list	*temp;
+
+	while (*head)
+	{
+		temp = *head;
+		*head = (*head)->next;
+		free(temp);
+	}
+}
+
+char	*initialize_end(t_list **head)
+{
+	char	*end;
+	t_list	*temp;
+	int		i;
+
+	if (!*head)
+		return (NULL);
+	end = malloc(list_len(*head) + 1);
+	if (!end)
+		return (ft_freelist(head), NULL);
+	i = 0;
+	while (*head)
+	{
+		end[i++] = (*head)->content;
+		temp = *head;
+		*head = (*head)->next;
+		free(temp);
+		if (end[i - 1] == '\n')
+			break ;
+	}
+	end[i] = '\0';
+	return (end);
+}
+
+int	list_len(t_list *head)
+{
+	int	i;
+
+	i = 0;
+	while (head && head->content != '\n')
+	{
+		head = head->next;
+		i++;
+	}
+	if (head && head->content == '\n')
+		i++;
+	return (i);
+}
+
+void	initialize_list(t_list **head, char c)
 {
 	t_list	*node;
 	t_list	*temp;
@@ -44,56 +96,4 @@ void	init_list(t_list **head, char c)
 		temp = temp->next;
 	}
 	temp->next = node;
-}
-
-char	*init_end(t_list **head)
-{
-	char	*end;
-	t_list	*temp;
-	int		i;
-
-	if (!*head)
-		return (NULL);
-	end = malloc(get_size(*head) + 1);
-	if (!end)
-		return (free_list(head), NULL);
-	i = 0;
-	while (*head)
-	{
-		end[i++] = (*head)->content;
-		temp = *head;
-		*head = (*head)->next;
-		free(temp);
-		if (end[i - 1] == '\n')
-			break ;
-	}
-	end[i] = '\0';
-	return (end);
-}
-
-int	get_size(t_list *head)
-{
-	int	i;
-
-	i = 0;
-	while (head && head->content != '\n')
-	{
-		head = head->next;
-		i++;
-	}
-	if (head && head->content == '\n')
-		i++;
-	return (i);
-}
-
-void	free_list(t_list **head)
-{
-	t_list	*tmp;
-
-	while (*head)
-	{
-		tmp = *head;
-		*head = (*head)->next;
-		free(tmp);
-	}
 }
